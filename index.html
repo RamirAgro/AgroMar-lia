@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgroMarília | Assistente de Manejo</title>
+<style>
+:root{--green:#2e7d32;--dark:#17351b;--light:#eef7ee;--card:#fff;--text:#243024}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f7f4;color:var(--text)}
+header{background:linear-gradient(135deg,#1b5e20,#43a047);color:white;padding:42px 7%;text-align:center}
+header h1{margin:0 0 10px;font-size:38px} header p{margin:0;font-size:18px}
+nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:18px;background:white;position:sticky;top:0;box-shadow:0 2px 8px #0001}
+nav button{border:0;border-radius:20px;padding:10px 16px;background:var(--light);color:var(--dark);cursor:pointer;font-weight:bold}
+main{max-width:1100px;margin:30px auto;padding:0 20px}
+.card{background:white;border-radius:16px;padding:24px;margin-bottom:20px;box-shadow:0 4px 16px #0000000d}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.item{padding:18px;border-radius:12px;background:var(--light);border-left:5px solid var(--green)}
+h2{color:var(--green)}h3{margin-top:0}
+select,input{width:100%;padding:12px;border:1px solid #ccd5cc;border-radius:9px;margin:6px 0 14px}
+.result{background:#f8fbf8;border:1px solid #d9e7d9;border-radius:12px;padding:18px;margin-top:10px}
+footer{text-align:center;padding:30px;color:#667}
+.small{font-size:13px;color:#607060}
+a{color:var(--green)}
+</style>
+</head>
+<body>
+<header>
+<h1>🌱 AgroMarília</h1>
+<p>Assistente de manejo agrícola — protótipo para Marília-SP</p>
+</header>
+
+<nav>
+<button onclick="show('inicio')">Início</button>
+<button onclick="show('solo')">Conservação do solo</button>
+<button onclick="show('rotacao')">Rotação</button>
+<button onclick="show('cobertura')">Matéria orgânica</button>
+<button onclick="show('pragas')">Pragas</button>
+<button onclick="show('daninhas')">Plantas daninhas</button>
+</nav>
+
+<main>
+<section id="inicio" class="page">
+<div class="card">
+<h2>Como usar</h2>
+<p>Escolha um módulo acima para consultar informações de apoio ao planejamento agrícola. O projeto foi pensado para crescer com dados regionais, referências técnicas e informações cadastradas pelo produtor.</p>
+<div class="grid">
+<div class="item"><h3>🌱 Solo</h3><p>Práticas de conservação, cobertura e redução de perdas.</p></div>
+<div class="item"><h3>🔄 Rotação</h3><p>Exemplos de sequências e objetivos agronômicos.</p></div>
+<div class="item"><h3>🐛 Pragas</h3><p>Organismos associados às principais culturas do protótipo.</p></div>
+<div class="item"><h3>🌿 Daninhas</h3><p>Plantas daninhas e pontos para manejo integrado.</p></div>
+</div>
+</div>
+<div class="card">
+<h2>Consulta rápida</h2>
+<label>Cultura</label>
+<select id="culture"><option>Soja</option><option>Milho</option><option>Amendoim</option><option>Cana-de-açúcar</option></select>
+<label>Objetivo</label>
+<select id="goal"><option>Aumentar cobertura e matéria orgânica</option><option>Diversificar a rotação</option><option>Consultar pragas</option><option>Consultar plantas daninhas</option></select>
+<button onclick="quick()" style="padding:12px 18px;border:0;border-radius:9px;background:#2e7d32;color:white;font-weight:bold">Consultar</button>
+<div id="quickResult" class="result">Selecione uma cultura e um objetivo.</div>
+</div>
+</section>
+
+<section id="solo" class="page" style="display:none">
+<div class="card"><h2>🌎 Conservação do solo</h2><div class="grid">
+<div class="item"><h3>Plantio direto</h3><p>Busca manter o solo coberto e reduzir o revolvimento.</p></div>
+<div class="item"><h3>Rotação de culturas</h3><p>Diversifica espécies e pode contribuir para qualidade do solo e manejo de problemas.</p></div>
+<div class="item"><h3>Plantas de cobertura</h3><p>Produzem biomassa e protegem a superfície do solo.</p></div>
+<div class="item"><h3>Terraceamento</h3><p>Ajuda a controlar o escoamento superficial e a erosão, conforme projeto adequado ao terreno.</p></div>
+</div></div>
+</section>
+
+<section id="rotacao" class="page" style="display:none">
+<div class="card"><h2>🔄 Rotação de culturas</h2>
+<div class="grid">
+<div class="item"><h3>Soja → Milho</h3><p>Diversificação e produção de resíduos para cobertura.</p></div>
+<div class="item"><h3>Soja → Milho + braquiária</h3><p>Combinação voltada à produção de palhada e cobertura.</p></div>
+<div class="item"><h3>Milho → Soja</h3><p>Alternância entre gramínea e leguminosa.</p></div>
+<div class="item"><h3>Soja → Crotalária</h3><p>Sucessão com planta de cobertura e diversificação.</p></div>
+</div>
+<p class="small">A sequência deve ser ajustada à região, solo, disponibilidade hídrica, janela de semeadura, histórico de pragas/doenças e objetivo da propriedade.</p>
+</div>
+</section>
+
+<section id="cobertura" class="page" style="display:none">
+<div class="card"><h2>🌿 Matéria orgânica e plantas de cobertura</h2>
+<div class="grid">
+<div class="item"><h3>Braquiária</h3><p>Gramínea com produção de palhada e sistema radicular vigoroso.</p></div>
+<div class="item"><h3>Milheto</h3><p>Opção de planta de cobertura com produção de biomassa.</p></div>
+<div class="item"><h3>Crotalária</h3><p>Leguminosa usada em sistemas de cobertura e diversificação.</p></div>
+<div class="item"><h3>Aveia</h3><p>Opção de cobertura conforme a janela climática.</p></div>
+</div>
+</div>
+</section>
+
+<section id="pragas" class="page" style="display:none">
+<div class="card"><h2>🐛 Pragas</h2>
+<div class="grid">
+<div class="item"><h3>Milho — Spodoptera frugiperda</h3><p>Lagarta associada a danos em milho. O sistema deve trabalhar com monitoramento e manejo integrado.</p></div>
+<div class="item"><h3>Milho — Dalbulus maidis</h3><p>Inseto associado à transmissão de doenças do milho. Monitoramento é parte importante do manejo.</p></div>
+<div class="item"><h3>Milho — Diatraea saccharalis</h3><p>Broca associada ao colmo do milho. Manejo deve considerar monitoramento e MIP.</p></div>
+<div class="item"><h3>Soja — percevejos</h3><p>Grupo de insetos que pode causar danos durante a fase reprodutiva. Monitoramento orienta decisões.</p></div>
+</div>
+</div>
+</section>
+
+<section id="daninhas" class="page" style="display:none">
+<div class="card"><h2>🌾 Plantas daninhas</h2>
+<div class="grid">
+<div class="item"><h3>Capim-amargoso</h3><p>Gramínea problemática em sistemas de grãos; manejo integrado e atenção à resistência são importantes.</p></div>
+<div class="item"><h3>Buva</h3><p>Planta daninha de folha larga; exige planejamento de manejo integrado.</p></div>
+<div class="item"><h3>Corda-de-viola</h3><p>Pode competir com a cultura e interferir na colheita.</p></div>
+<div class="item"><h3>Trapoeraba</h3><p>Pode competir com culturas e apresentar dificuldade de manejo.</p></div>
+</div>
+</div>
+</section>
+
+<div class="card">
+<h2>📚 Referências iniciais</h2>
+<ul>
+<li><a href="https://www.embrapa.br/en/web/agencia-de-informacao-tecnologica/cultivos/soja/producao/manejo-do-solo/rotacao-de-culturas" target="_blank">Embrapa — Rotação de culturas</a></li>
+<li><a href="https://bioinfo.cnpso.embrapa.br/seca/index.php?Itemid=478&id=75&option=com_content&view=article" target="_blank">Embrapa — Manejo do solo</a></li>
+<li><a href="https://apct.sede.embrapa.br/pab/pt_BR/article/view/28169" target="_blank">Embrapa — Dinâmica do carbono em rotação milho-soja</a></li>
+</ul>
+<p class="small">Protótipo educacional. Recomendações de manejo devem ser validadas para a propriedade e condições locais.</p>
+</div>
+</main>
+<footer>AgroMarília • Protótipo acadêmico de apoio ao manejo agrícola</footer>
+
+<script>
+function show(id){
+ document.querySelectorAll('.page').forEach(x=>x.style.display='none');
+ document.getElementById(id).style.display='block';
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function quick(){
+ const c=document.getElementById('culture').value;
+ const g=document.getElementById('goal').value;
+ let r='';
+ if(g.includes('cobertura')) r=`Para ${c}, considere estratégias com plantas de cobertura e rotação. O sistema deve avaliar janela de semeadura, água, solo e objetivo da propriedade.`;
+ else if(g.includes('rotação')) r=`Para ${c}, uma opção de consulta inicial é alternar com culturas de outro grupo botânico, como milho/soja, ou inserir plantas de cobertura.`;
+ else if(g.includes('pragas')) r=`Consulte o módulo de pragas e complemente a base com as espécies registradas na sua área e recomendações de manejo integrado.`;
+ else r=`Consulte o módulo de plantas daninhas e registre as espécies observadas na área para construir um histórico.`;
+ document.getElementById('quickResult').innerHTML='<strong>'+c+'</strong><br>'+r;
+}
+</script>
+</body>
+</html>
